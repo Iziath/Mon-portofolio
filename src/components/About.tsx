@@ -1,4 +1,3 @@
-import React from 'react';
 import { MapPin, Calendar, Coffee, Heart } from 'lucide-react';
 
 const About = () => {
@@ -18,15 +17,15 @@ const About = () => {
           {/* Photo */}
           <div className="text-center lg:text-left">
             <div className="relative inline-block">
-              <div className="w-80 h-80 mx-auto lg:mx-0 rounded-2xl overflow-hidden border-4 border-red-500/20 hover:border-red-500/40 transition-all duration-300">
+              <div className="w-64 h-64 sm:w-80 sm:h-80 mx-auto lg:mx-0 rounded-2xl overflow-hidden border-4 border-red-500/20 hover:border-red-500/40 transition-all duration-300">
                 <img
-                  src="https://images.pexels.com/photos/3756679/pexels-photo-3756679.jpeg?auto=compress&cs=tinysrgb&w=800"
+                  src="/assets/images/profil/profil.jpg"
                   alt="Iziath - Développeuse Web"
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                 />
               </div>
-              <div className="absolute -bottom-4 -right-4 bg-red-500 p-4 rounded-full">
-                <Coffee className="w-6 h-6 text-white" />
+              <div className="absolute -bottom-4 -right-4 bg-red-500 p-3 sm:p-4 rounded-full">
+                <Coffee className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </div>
             </div>
           </div>
@@ -34,10 +33,10 @@ const About = () => {
           {/* Description */}
           <div className="space-y-6">
             <div>
-              <h3 className="text-3xl font-bold mb-4">
+              <h3 className="text-2xl sm:text-3xl font-bold mb-4">
                 Salut, moi c'est <span className="text-red-500">Iziath</span> ! 
               </h3>
-              <p className="text-gray-300 text-lg leading-relaxed mb-6">
+              <p className="text-gray-300 text-base sm:text-lg leading-relaxed mb-6">
                 Développeuse web passionnée depuis plus de 2 ans, je transforme vos idées 
                 en expériences digitales modernes et performantes. Mon approche combine 
                 créativité, technique et attention aux détails pour créer des solutions 

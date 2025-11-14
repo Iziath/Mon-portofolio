@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ChevronDown, Code2, Sparkles } from 'lucide-react';
 
 const Hero = () => {

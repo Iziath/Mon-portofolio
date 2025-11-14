@@ -1,13 +1,8 @@
-import React from 'react';
 import { 
   Code2, 
   Palette, 
-  Database, 
-  Globe, 
-  Smartphone, 
-  GitBranch,
+  Database,  
   Terminal,
-  Figma,
   Users,
   Lightbulb,
   Target,
@@ -25,6 +20,7 @@ const Skills = () => {
         { name: "JavaScript", level: 88 },
         { name: "TypeScript", level: 85 },
         { name: "React", level: 90 },
+        { name: "React Native", level: 85 },
         { name: "Node.js", level: 80 }
       ]
     },
@@ -44,10 +40,12 @@ const Skills = () => {
       title: "Backend & Base de données",
       icon: Database,
       skills: [
+        { name: "Next.js", level: 88 },
+        { name: "Express.js", level: 85 },
+        { name: "Node.js", level: 80 },
         { name: "MongoDB", level: 75 },
         { name: "PostgreSQL", level: 70 },
         { name: "Firebase", level: 80 },
-        { name: "Supabase", level: 85 },
         { name: "REST APIs", level: 82 },
         { name: "GraphQL", level: 65 }
       ]
@@ -103,7 +101,7 @@ const Skills = () => {
 
         {/* Technical Skills */}
         <div className="grid md:grid-cols-2 gap-8 mb-16">
-          {skillCategories.map((category, index) => {
+          {skillCategories.map((category) => {
             const IconComponent = category.icon;
             return (
               <div
@@ -142,7 +140,7 @@ const Skills = () => {
             Qualités <span className="text-red-500">Humaines</span>
           </h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {softSkills.map((skill, index) => {
+            {softSkills.map((skill) => {
               const IconComponent = skill.icon;
               return (
                 <div

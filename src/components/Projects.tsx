@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { ExternalLink, Github, Smartphone, Globe, ShoppingCart, Database, Palette, Code2 } from 'lucide-react';
+import { useState } from 'react';
+import { ExternalLink, Github, Globe, Database, Palette, Code2, MessageCircle, Smartphone } from 'lucide-react';
 
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -7,101 +7,65 @@ const Projects = () => {
 
   const categories = [
     { id: 'all', name: 'Tous', icon: Code2 },
-    { id: 'e-commerce', name: 'E-commerce', icon: ShoppingCart },
-    { id: 'vitrine', name: 'Sites Vitrine', icon: Globe },
-    { id: 'application', name: 'Applications', icon: Smartphone },
-    { id: 'design', name: 'Design', icon: Palette }
+    { id: 'application', name: 'Applications', icon: Globe },
+    { id: 'library', name: 'Bibliothèques', icon: Code2 },
+    { id: 'framework', name: 'Frameworks', icon: Globe },
+    { id: 'tool', name: 'Outils', icon: Database },
+    { id: 'ui', name: 'UI/UX', icon: Palette }
   ];
 
   const projects = [
     {
-      title: "E-commerce Fashion",
-      category: "e-commerce",
-      description: "Boutique en ligne moderne avec panier, paiement sécurisé et gestion des stocks.",
-      image: "https://images.pexels.com/photos/5632402/pexels-photo-5632402.jpeg?auto=compress&cs=tinysrgb&w=800",
-      tech: ["React", "Node.js", "Stripe", "MongoDB"],
-      icon: ShoppingCart,
-      links: { demo: "#", github: "#" },
+      title: "Shora",
+      category: "application",
+      description: "Application web fullstack moderne avec frontend React, backend API et chatbot intelligent intégré. Inclut un dashboard administrateur complet pour la gestion et le suivi des données en temps réel. Architecture modulaire avec trois dépôts séparés.",
+      image: "/assets/images/Captureshora.JPG",
+      tech: ["React", "TypeScript", "Node.js", "Chatbot AI", "Dashboard", "WhatsApp API"],
+      icon: MessageCircle,
+      links: { 
+        demo: "https://shora-front.vercel.app/", 
+        github: "https://github.com/Iziath/shora_front",
+        githubBackend: "https://github.com/Iziath/shora-backend",
+        githubBot: "https://github.com/Iziath/shora",
+        dashboard: "https://shora-front.vercel.app/dashboard"
+      },
       featured: true
     },
     {
-      title: "Portfolio Créatif",
-      category: "vitrine",
-      description: "Portfolio interactif pour un artiste avec galerie d'œuvres et animations personnalisées.",
-      image: "https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800",
-      tech: ["React", "Framer Motion", "Tailwind", "Vercel"],
-      icon: Globe,
-      links: { demo: "#", github: "#" },
-      featured: false
-    },
-    {
-      title: "App Mobile Fitness",
+      title: "Sellwave (Auctify)",
       category: "application",
-      description: "Application de suivi d'entraînement avec tableaux de bord et statistiques avancées.",
-      image: "https://images.pexels.com/photos/4164771/pexels-photo-4164771.jpeg?auto=compress&cs=tinysrgb&w=800",
-      tech: ["React Native", "Firebase", "TypeScript", "Expo"],
+      description: "Application mobile de vente aux enchères développée avec Flutter. Plateforme complète permettant aux utilisateurs de créer, suivre et participer à des enchères en temps réel. Inclut une application administrateur séparée pour la gestion des ventes et des utilisateurs.",
+      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
+      tech: ["Flutter", "Dart", "Firebase", "Mobile", "Admin Panel"],
       icon: Smartphone,
-      links: { demo: "#", github: "#" },
+      links: { 
+        github: "https://github.com/Iziath/sellwave",
+        githubAdmin: "https://github.com/Iziath/auctify_admin"
+      },
       featured: true
     },
     {
-      title: "Dashboard Analytics",
+      title: "RAMP-BENIN E-LEARNING",
       category: "application",
-      description: "Interface d'administration avec graphiques interactifs et gestion des données en temps réel.",
-      image: "https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=800",
-      tech: ["Vue.js", "D3.js", "Express", "PostgreSQL"],
-      icon: Database,
-      links: { demo: "#", github: "#" },
-      featured: false
-    },
-    {
-      title: "Restaurant Gastronomique",
-      category: "vitrine",
-      description: "Site vitrine élégant avec réservation en ligne et menu interactif.",
-      image: "https://images.pexels.com/photos/1581384/pexels-photo-1581384.jpeg?auto=compress&cs=tinysrgb&w=800",
-      tech: ["Next.js", "Tailwind", "Sanity", "Netlify"],
+      description: "Plateforme e-learning complète développée avec WordPress pour RAMP-BENIN. Système de gestion de cours en ligne avec inscriptions, suivi des apprenants, certifications et gestion des enseignants. Focus sur les formations en paix, sécurité et gouvernance.",
+      image: "/assets/images/Captureramp.JPG",
+      tech: ["WordPress", "PHP", "MySQL", "E-Learning", "LMS"],
       icon: Globe,
-      links: { demo: "#", github: "#" },
-      featured: false
-    },
-    {
-      title: "Marketplace B2B",
-      category: "e-commerce",
-      description: "Plateforme de vente B2B avec système de commandes complexe et multi-vendeurs.",
-      image: "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800",
-      tech: ["React", "Node.js", "GraphQL", "AWS"],
-      icon: ShoppingCart,
-      links: { demo: "#", github: "#" },
+      links: { 
+        demo: "https://www.e-learning.ramp-afrique.org/"
+      },
       featured: true
     },
     {
-      title: "App de Méditation",
+      title: "Gestion de Dépenses",
       category: "application",
-      description: "Application mobile de méditation avec sessions guidées et suivi de progression.",
-      image: "https://images.pexels.com/photos/3822622/pexels-photo-3822622.jpeg?auto=compress&cs=tinysrgb&w=800",
-      tech: ["Flutter", "Firebase", "Stripe", "REST API"],
+      description: "Application mobile de gestion de dépenses personnelles développée avec React Native et TypeScript. Suivi des revenus et dépenses, catégorisation, statistiques et rapports visuels. Application en cours de développement.",
+      image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80",
+      tech: ["React Native", "TypeScript", "Expo", "Mobile", "Finance"],
       icon: Smartphone,
-      links: { demo: "#", github: "#" },
-      featured: false
-    },
-    {
-      title: "Agence Immobilière",
-      category: "vitrine",
-      description: "Site vitrine moderne avec recherche avancée et visite virtuelle 360°.",
-      image: "https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=800",
-      tech: ["React", "Three.js", "Node.js", "MongoDB"],
-      icon: Globe,
-      links: { demo: "#", github: "#" },
-      featured: false
-    },
-    {
-      title: "Système de Réservation",
-      category: "application",
-      description: "Plateforme de réservation multi-services avec calendrier intelligent et notifications.",
-      image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800",
-      tech: ["Vue.js", "Laravel", "MySQL", "Socket.io"],
-      icon: Database,
-      links: { demo: "#", github: "#" },
+      links: { 
+        github: "https://github.com/Iziath/gestion-de-depense"
+      },
       featured: false
     }
   ];
@@ -110,8 +74,13 @@ const Projects = () => {
     ? projects 
     : projects.filter(project => project.category === activeFilter);
 
-  const displayedProjects = filteredProjects.slice(0, visibleProjects);
-  const hasMoreProjects = filteredProjects.length > visibleProjects;
+  // Exclure les projets en vedette de la liste "Tous les projets" quand on est sur "all"
+  const projectsToDisplay = activeFilter === 'all' 
+    ? filteredProjects.filter(project => !project.featured)
+    : filteredProjects;
+
+  const displayedProjects = projectsToDisplay.slice(0, visibleProjects);
+  const hasMoreProjects = projectsToDisplay.length > visibleProjects;
 
   const loadMoreProjects = () => {
     setVisibleProjects(prev => prev + 6);
@@ -125,7 +94,7 @@ const Projects = () => {
             Mes <span className="text-red-500">Projets</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto mb-8">
-            Une sélection de mes réalisations récentes dans différents domaines
+            Projets open source auxquels j'ai contribué ou que j'utilise dans mes développements
           </p>
 
           {/* Filtres par catégorie */}
@@ -160,7 +129,7 @@ const Projects = () => {
               Projets <span className="text-red-500">en vedette</span>
             </h3>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {projects.filter(project => project.featured).map((project, index) => {
+              {projects.filter(project => project.featured).map((project) => {
                 const IconComponent = project.icon;
                 return (
                   <div
@@ -204,21 +173,79 @@ const Projects = () => {
                         ))}
                       </div>
 
-                      <div className="flex gap-3">
-                        <a
-                          href={project.links.demo}
-                          className="flex items-center text-sm text-gray-400 hover:text-red-500 transition-colors"
-                        >
-                          <ExternalLink className="w-4 h-4 mr-1" />
-                          Demo
-                        </a>
-                        <a
-                          href={project.links.github}
-                          className="flex items-center text-sm text-gray-400 hover:text-red-500 transition-colors"
-                        >
-                          <Github className="w-4 h-4 mr-1" />
-                          Code
-                        </a>
+                      <div className="flex flex-col gap-2">
+                        <div className="flex gap-3 flex-wrap">
+                          {project.links.demo && (
+                            <a
+                              href={project.links.demo}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center text-sm text-gray-400 hover:text-red-500 transition-colors"
+                            >
+                              <ExternalLink className="w-4 h-4 mr-1" />
+                              Demo
+                            </a>
+                          )}
+                          {project.links.dashboard && (
+                            <a
+                              href={project.links.dashboard}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center text-sm text-gray-400 hover:text-red-500 transition-colors"
+                            >
+                              <Database className="w-4 h-4 mr-1" />
+                              Dashboard
+                            </a>
+                          )}
+                          {project.links.github && (
+                            <a
+                              href={project.links.github}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center text-sm text-gray-400 hover:text-red-500 transition-colors"
+                            >
+                              <Github className="w-4 h-4 mr-1" />
+                              {project.links.githubBackend || project.links.githubBot || project.links.githubAdmin ? (project.links.githubAdmin ? 'Mobile' : 'Frontend') : 'Code'}
+                            </a>
+                          )}
+                        </div>
+                        {(project.links.githubBackend || project.links.githubBot || project.links.githubAdmin) && (
+                          <div className="flex gap-3 flex-wrap text-xs">
+                            {project.links.githubBackend && (
+                              <a
+                                href={project.links.githubBackend}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center text-gray-500 hover:text-red-500 transition-colors"
+                              >
+                                <Github className="w-3 h-3 mr-1" />
+                                Backend
+                              </a>
+                            )}
+                            {project.links.githubBot && (
+                              <a
+                                href={project.links.githubBot}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center text-gray-500 hover:text-red-500 transition-colors"
+                              >
+                                <Github className="w-3 h-3 mr-1" />
+                                Bot
+                              </a>
+                            )}
+                            {project.links.githubAdmin && (
+                              <a
+                                href={project.links.githubAdmin}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center text-gray-500 hover:text-red-500 transition-colors"
+                              >
+                                <Github className="w-3 h-3 mr-1" />
+                                Admin
+                              </a>
+                            )}
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -234,8 +261,13 @@ const Projects = () => {
             <h3 className="text-2xl font-bold mb-8 text-center">
               {categories.find(cat => cat.id === activeFilter)?.name}
               <span className="text-gray-400 text-lg ml-2">
-                ({filteredProjects.length} projet{filteredProjects.length > 1 ? 's' : ''})
+                ({projectsToDisplay.length} projet{projectsToDisplay.length > 1 ? 's' : ''})
               </span>
+            </h3>
+          )}
+          {activeFilter === 'all' && projectsToDisplay.length > 0 && (
+            <h3 className="text-2xl font-bold mb-8 text-center">
+              Autres <span className="text-red-500">Projets</span>
             </h3>
           )}
           
@@ -279,21 +311,79 @@ const Projects = () => {
                       ))}
                     </div>
 
-                    <div className="flex gap-3">
-                      <a
-                        href={project.links.demo}
-                        className="flex items-center text-sm text-gray-400 hover:text-red-500 transition-colors"
-                      >
-                        <ExternalLink className="w-4 h-4 mr-1" />
-                        Demo
-                      </a>
-                      <a
-                        href={project.links.github}
-                        className="flex items-center text-sm text-gray-400 hover:text-red-500 transition-colors"
-                      >
-                        <Github className="w-4 h-4 mr-1" />
-                        Code
-                      </a>
+                    <div className="flex flex-col gap-2">
+                      <div className="flex gap-3 flex-wrap">
+                        {project.links.demo && (
+                          <a
+                            href={project.links.demo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center text-sm text-gray-400 hover:text-red-500 transition-colors"
+                          >
+                            <ExternalLink className="w-4 h-4 mr-1" />
+                            Demo
+                          </a>
+                        )}
+                        {project.links.dashboard && (
+                          <a
+                            href={project.links.dashboard}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center text-sm text-gray-400 hover:text-red-500 transition-colors"
+                          >
+                            <Database className="w-4 h-4 mr-1" />
+                            Dashboard
+                          </a>
+                        )}
+                        {project.links.github && (
+                          <a
+                            href={project.links.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center text-sm text-gray-400 hover:text-red-500 transition-colors"
+                          >
+                            <Github className="w-4 h-4 mr-1" />
+                            {project.links.githubBackend || project.links.githubBot || project.links.githubAdmin ? (project.links.githubAdmin ? 'Mobile' : 'Frontend') : 'Code'}
+                          </a>
+                        )}
+                      </div>
+                      {(project.links.githubBackend || project.links.githubBot || project.links.githubAdmin) && (
+                        <div className="flex gap-3 flex-wrap text-xs">
+                          {project.links.githubBackend && (
+                            <a
+                              href={project.links.githubBackend}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center text-gray-500 hover:text-red-500 transition-colors"
+                            >
+                              <Github className="w-3 h-3 mr-1" />
+                              Backend
+                            </a>
+                          )}
+                          {project.links.githubBot && (
+                            <a
+                              href={project.links.githubBot}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center text-gray-500 hover:text-red-500 transition-colors"
+                            >
+                              <Github className="w-3 h-3 mr-1" />
+                              Bot
+                            </a>
+                          )}
+                          {project.links.githubAdmin && (
+                            <a
+                              href={project.links.githubAdmin}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center text-gray-500 hover:text-red-500 transition-colors"
+                            >
+                              <Github className="w-3 h-3 mr-1" />
+                              Admin
+                            </a>
+                          )}
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -308,17 +398,17 @@ const Projects = () => {
                 onClick={loadMoreProjects}
                 className="bg-gray-800 hover:bg-red-500 text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-red-500/25"
               >
-                Voir plus de projets ({filteredProjects.length - visibleProjects} restants)
+                Voir plus de projets ({projectsToDisplay.length - visibleProjects} restants)
               </button>
             </div>
           )}
         </div>
 
         {/* Message si aucun projet */}
-        {filteredProjects.length === 0 && (
+        {projectsToDisplay.length === 0 && (
           <div className="text-center py-12">
             <p className="text-gray-400 text-lg">
-              Aucun projet trouvé dans cette catégorie.
+              {activeFilter === 'all' ? 'Tous les projets sont en vedette.' : 'Aucun projet trouvé dans cette catégorie.'}
             </p>
           </div>
         )}

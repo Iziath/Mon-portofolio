@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, CheckCircle } from 'lucide-react';
+import { useState } from 'react';
+import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle, Loader } from 'lucide-react';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -8,21 +8,75 @@ const Contact = () => {
     subject: '',
     message: ''
   });
-  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const [submitStatus, setSubmitStatus] = useState({
+    isSubmitting: false,
+    isSubmitted: false,
+    isError: false,
+    message: ''
+  });
+
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate form submission
-    setIsSubmitted(true);
-    setTimeout(() => setIsSubmitted(false), 3000);
-    setFormData({ name: '', email: '', subject: '', message: '' });
+
+    setSubmitStatus({
+      isSubmitting: true,
+      isSubmitted: false,
+      isError: false,
+      message: 'Envoi en cours...'
+    });
+
+    try {
+      const response = await fetch(`${API_URL}/api/contact`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSubmitStatus({
+          isSubmitting: false,
+          isSubmitted: true,
+          isError: false,
+          message: '✅ Message envoyé ! Je vous recontacterai sous 24h.'
+        });
+
+        setFormData({ name: '', email: '', subject: '', message: '' });
+
+        setTimeout(() => {
+          setSubmitStatus(prev => ({ ...prev, isSubmitted: false, message: '' }));
+        }, 5000);
+      } else {
+        throw new Error(data.message || 'Erreur inconnue');
+      }
+    } catch (error) {
+      console.error('Erreur:', error);
+      setSubmitStatus({
+        isSubmitting: false,
+        isSubmitted: false,
+        isError: true,
+        message: '❌ Erreur d\'envoi. Contactez-moi directement par email ou téléphone.'
+      });
+
+      setTimeout(() => {
+        setSubmitStatus(prev => ({ ...prev, isError: false, message: '' }));
+      }, 7000);
+    }
   };
 
   return (
@@ -38,7 +92,7 @@ const Contact = () => {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Info */}
+          {/* Bloc informations */}
           <div>
             <h3 className="text-2xl font-bold mb-8">Informations de contact</h3>
             
@@ -49,7 +103,12 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold">Email</h4>
-                  <p className="text-gray-400">aiwasenaiziath.com</p>
+                  <a 
+                    href="mailto:contact@iziath.com" 
+                    className="text-gray-400 hover:text-red-500 transition-colors"
+                  >
+                    contact@iziath.com
+                  </a>
                 </div>
               </div>
 
@@ -59,7 +118,12 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold">Téléphone</h4>
-                  <p className="text-gray-400">+229 01 53 93 00 31</p>
+                  <a 
+                    href="tel:+22901539300031" 
+                    className="text-gray-400 hover:text-red-500 transition-colors"
+                  >
+                    +229 01 53 93 00 31
+                  </a>
                 </div>
               </div>
 
@@ -75,7 +139,7 @@ const Contact = () => {
             </div>
 
             <div className="mt-8 p-6 bg-gray-900/50 rounded-xl border border-gray-800">
-              <h4 className="font-semibold mb-3">Temps de réponse</h4>
+              <h4 className="font-semibold mb-3">⏱️ Temps de réponse</h4>
               <p className="text-gray-400 text-sm">
                 Je réponds généralement sous 24h. Pour les projets urgents, 
                 n'hésitez pas à me contacter directement par téléphone.
@@ -83,13 +147,32 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Contact Form */}
+          {/* Formulaire */}
           <div>
+            {submitStatus.message && (
+              <div className={`mb-6 p-4 rounded-lg flex items-start ${
+                submitStatus.isSubmitted 
+                  ? 'bg-green-500/10 border border-green-500/20 text-green-400'
+                  : submitStatus.isError
+                  ? 'bg-red-500/10 border border-red-500/20 text-red-400'
+                  : 'bg-blue-500/10 border border-blue-500/20 text-blue-400'
+              }`}>
+                {submitStatus.isSubmitting ? (
+                  <Loader className="w-5 h-5 mr-3 mt-0.5 animate-spin flex-shrink-0" />
+                ) : submitStatus.isSubmitted ? (
+                  <CheckCircle className="w-5 h-5 mr-3 mt-0.5 flex-shrink-0" />
+                ) : (
+                  <AlertCircle className="w-5 h-5 mr-3 mt-0.5 flex-shrink-0" />
+                )}
+                <p className="text-sm">{submitStatus.message}</p>
+              </div>
+            )}
+
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium mb-2">
-                    Nom complet
+                    Nom complet *
                   </label>
                   <input
                     type="text"
@@ -98,14 +181,15 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-lg focus:border-red-500 focus:outline-none transition-colors"
-                    placeholder="Votre nom"
+                    disabled={submitStatus.isSubmitting}
+                    className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-lg focus:border-red-500 focus:outline-none disabled:opacity-50"
+                    placeholder="Votre nom complet"
                   />
                 </div>
-                
+
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium mb-2">
-                    Email
+                    Email *
                   </label>
                   <input
                     type="email"
@@ -114,7 +198,8 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-lg focus:border-red-500 focus:outline-none transition-colors"
+                    disabled={submitStatus.isSubmitting}
+                    className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-lg focus:border-red-500 focus:outline-none disabled:opacity-50"
                     placeholder="votre@email.com"
                   />
                 </div>
@@ -122,7 +207,7 @@ const Contact = () => {
 
               <div>
                 <label htmlFor="subject" className="block text-sm font-medium mb-2">
-                  Type de projet
+                  Type de projet *
                 </label>
                 <select
                   id="subject"
@@ -130,19 +215,23 @@ const Contact = () => {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-lg focus:border-red-500 focus:outline-none transition-colors"
+                  disabled={submitStatus.isSubmitting}
+                  className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-lg focus:border-red-500 focus:outline-none disabled:opacity-50"
                 >
                   <option value="">Sélectionnez un type</option>
                   <option value="site-vitrine">Site Vitrine</option>
                   <option value="e-commerce">Site E-commerce</option>
                   <option value="application">Application Web</option>
+                  <option value="mobile">Application Mobile</option>
+                  <option value="refonte">Refonte de site</option>
+                  <option value="maintenance">Maintenance</option>
                   <option value="autre">Autre</option>
                 </select>
               </div>
 
               <div>
                 <label htmlFor="message" className="block text-sm font-medium mb-2">
-                  Message
+                  Message *
                 </label>
                 <textarea
                   id="message"
@@ -151,20 +240,21 @@ const Contact = () => {
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-lg focus:border-red-500 focus:outline-none transition-colors resize-none"
-                  placeholder="Décrivez votre projet en quelques mots..."
+                  disabled={submitStatus.isSubmitting}
+                  className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-lg focus:border-red-500 focus:outline-none resize-none disabled:opacity-50"
+                  placeholder="Décrivez votre projet..."
                 />
               </div>
 
               <button
                 type="submit"
-                disabled={isSubmitted}
-                className="w-full bg-red-500 hover:bg-red-600 disabled:bg-gray-600 text-white py-4 rounded-lg font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-red-500/25 flex items-center justify-center"
+                disabled={submitStatus.isSubmitting}
+                className="w-full bg-red-500 hover:bg-red-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-white py-4 rounded-lg font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-red-500/25 flex items-center justify-center"
               >
-                {isSubmitted ? (
+                {submitStatus.isSubmitting ? (
                   <>
-                    <CheckCircle className="w-5 h-5 mr-2" />
-                    Message envoyé !
+                    <Loader className="w-5 h-5 mr-2 animate-spin" />
+                    Envoi en cours...
                   </>
                 ) : (
                   <>
@@ -173,6 +263,10 @@ const Contact = () => {
                   </>
                 )}
               </button>
+
+              <p className="text-xs text-gray-500 text-center">
+                * Champs obligatoires
+              </p>
             </form>
           </div>
         </div>

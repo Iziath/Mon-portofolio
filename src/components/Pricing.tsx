@@ -1,4 +1,3 @@
-import React from 'react';
 import { Check, Star, Zap, Crown } from 'lucide-react';
 
 const Pricing = () => {
@@ -6,8 +5,8 @@ const Pricing = () => {
     {
       name: "Site Vitrine",
       icon: Star,
-      price: " A partir de 153€",
-      description: "Parfait pour présenter votre activité "  ,
+      price: "À partir de 153€",
+      description: "Parfait pour présenter votre activité",
       features: [
         "Design responsive sur mesure",
         "Jusqu'à 5 pages",
@@ -71,7 +70,7 @@ const Pricing = () => {
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {plans.map((plan, index) => {
+          {plans.map((plan) => {
             const IconComponent = plan.icon;
             return (
               <div
